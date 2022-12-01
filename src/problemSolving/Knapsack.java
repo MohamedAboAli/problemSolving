@@ -46,10 +46,10 @@ public class Knapsack {
 
 	public static int[][] dp;
 
-	public static void initalize( int elementNumber, int c) {
+	public static void initalize(int elementNumber, int c) {
 		dp = new int[elementNumber + 1][c + 1];
-		for (int i = 0; i < elementNumber+1; i++) {
-			for (int j = 0; j < c+1; j++) {
+		for (int i = 0; i < elementNumber + 1; i++) {
+			for (int j = 0; j < c + 1; j++) {
 				dp[i][j] = -1;
 			}
 		}
@@ -79,6 +79,19 @@ public class Knapsack {
 				getKnapsackValue(w, v, c, elementNumber - 1)));
 	}
 
+	public static int knapSackWithoutDP(int[] w, int[] v, int n, int c) {
+
+		if (n <= 0) {
+			return 0;
+		}
+		if (c < w[n - 1]) {
+			return knapSackWithoutDP(w, v, n - 1, c);
+		}
+
+		return Math.max(knapSackWithoutDP(w, v, n - 1, c - w[n - 1]) + v[n - 1], knapSackWithoutDP(w, v, n - 1, c));
+
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] values = { 60, 100, 120 };
@@ -89,6 +102,8 @@ public class Knapsack {
 		// invoking the getMaxValue() method
 		System.out.println(getMaxValue(weight, values, C));
 		System.out.println(getKnapsackValueWraper(weight, values, C, n));
+		System.out.println(knapSackWithoutDP(weight, values, n, C));
+
 	}
 
 }
