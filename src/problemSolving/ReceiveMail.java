@@ -23,7 +23,7 @@ public class ReceiveMail {
 			
 			Session emailSession = Session.getDefaultInstance(properties);
 
-			POP3Store emailStore = (POP3Store) emailSession.getStore(storeType);
+			Store emailStore = emailSession.getStore(storeType);
 			emailStore.connect(pop3Host, 995,user, password);
 
 			Folder emailFolder = emailStore.getFolder("INBOX");
